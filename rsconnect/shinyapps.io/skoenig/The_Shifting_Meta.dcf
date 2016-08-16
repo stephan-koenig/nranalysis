@@ -1,0 +1,10 @@
+name: the_shifting_meta
+account: skoenig
+server: shinyapps.io
+appId: 120226
+bundleId: 532522
+url: https://skoenig.shinyapps.io/the_shifting_meta/
+when: 1471290157.71045
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: get_win_rates.R|nrdata_analysis.Rmd|nrdata.RData|README.md

@@ -23,15 +23,18 @@ shinyUI(fluidPage(
     ),
 
     mainPanel(
+      tabsetPanel(
 
-      # Display output$NAME defined in server.R.
-      plotOutput("meta_plot"), #, width = "800px", height = "600px"
+        # Display output$NAME defined in server.R.
+        tabPanel("Graph", plotOutput("meta_plot")),
 
-      dataTableOutput("meta_table"),
+        tabPanel("Table", dataTableOutput("meta_table")),
 
-      # Slider input to select release.
+        # Slider input to select release.
 
-      includeMarkdown("instructions.md")
+        tabPanel("Instructions", includeMarkdown("instructions.md"))
+
+      )
     )
   )
 ))

@@ -9,10 +9,13 @@ shinyUI(fluidPage(
   # Application title.
   titlePanel("The Shifting Meta"),
 
-  # Choose layout with sidebar
+  # Sidebar layout.
   sidebarLayout(
 
+    # Elements in left sidebar.
     sidebarPanel(
+
+      # Slider for input.
       sliderInput("release",
                   "Release:",
                   min = 1,
@@ -22,16 +25,19 @@ shinyUI(fluidPage(
                   animate = TRUE)
     ),
 
+    # Elements in main (right) panel.
     mainPanel(
+
+      # Tab layout for multiple planes of output.
       tabsetPanel(
 
-        # Display output$NAME defined in server.R.
+        # Graph plane.
         tabPanel("Graph", plotOutput("meta_plot")),
 
+        # Table plane.
         tabPanel("Table", dataTableOutput("meta_table")),
 
-        # Slider input to select release.
-
+        # Instructions plane.
         tabPanel("Instructions", includeMarkdown("instructions.md"))
 
       )

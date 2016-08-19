@@ -10,7 +10,7 @@ shinyServer(function(input, output) {
   # Enclose R object that is reactive but used by multiple render functions
   # in reactive function. The object is a function, so include () at end.
   filtered <- reactive({
-    # Filter data set based oninput$release from ui.R.
+    # Filter data set based on input$release from ui.R.
     filtered <- combined %>%
       filter(release == releases[input$release])
   })
@@ -19,7 +19,8 @@ shinyServer(function(input, output) {
   # Use {} to group code inside render*().
   output$meta_plot <- renderPlot({
 
-    # Draw XY graph. filtered is a reactive function, thus ().
+    # Draw XY graph. filtered is a reactive function (not just a data frame),
+    # thus ().
     ggplot(filtered(), aes(runner_id, corp_id,
                        size = matchup_freq,
                        colour = corp_wins_percent)) +
@@ -33,7 +34,10 @@ shinyServer(function(input, output) {
                              limits = c(0,100),
                              name = "Corp win [%]") +
       theme_bw() +
-      theme(axis.text.x = element_text(angle = 45, hjust = 1),
+      theme(axis.text.x = element_text(angle = 45, hjust = 1,
+                                       color = runnercolors),
+            axis.text.y = element_text(color = corpcolors),
+            # Maybe add different colors for different corp/runner factions.
             axis.ticks = element_blank(),
             panel.background = element_blank(),
             panel.border = element_blank(),
@@ -49,9 +53,12 @@ shinyServer(function(input, output) {
              matchup_freq = round(matchup_freq, digits = 1)) %>%
       select("Corp" = corp_id,
              "Runner" = runner_id,
-             "Corp wins [%]" = corp_wins_percent,
+             "# Games" = matchup_games,
              "Matchup freq [%]" = matchup_freq,
-             "# Games" = matchup_games)
-    })
+             "Corp wins [%]" = corp_wins_percent)
+    # Sort table by 3th column descending (JS, thus uses 0 indexing), turn off
+    # pagination.
+    }, options = list(order = list(2, "desc"),
+                      paging = FALSE))
 
 })

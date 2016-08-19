@@ -45,7 +45,7 @@ shinyServer(function(input, output) {
             legend.key = element_rect(colour = NA)) +
       guides(colour = guide_legend(override.aes = list(alpha = 0.8)))
 
-  })
+  }, width = 640, height = 480)
 
   output$meta_table <- renderDataTable({
     filtered()  %>%

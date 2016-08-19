@@ -2,9 +2,9 @@ name: the_shifting_meta
 account: skoenig
 server: shinyapps.io
 appId: 120226
-bundleId: 536462
+bundleId: 536470
 url: https://skoenig.shinyapps.io/the_shifting_meta/
-when: 1471641510.76428
+when: 1471641986.84231
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: README.md

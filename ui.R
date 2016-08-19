@@ -3,6 +3,7 @@
 #
 
 library(shiny)
+require(markdown)
 
 shinyUI(fluidPage(
 

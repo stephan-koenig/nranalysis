@@ -29,21 +29,17 @@ shinyServer(function(input, output) {
                       name = "Matchup freq [%]") +
       labs(title = releases[input$release],
            x = "Runner", y = "Corp") +
-      scale_colour_gradient2(low = "Red", high = "Blue", mid = "grey97",
-                             midpoint = 50, na.value = "grey95",
-                             limits = c(0,100),
-                             name = "Corp win [%]") +
-      theme_bw() +
+      scale_color_gradient2(low = "Red", high = "Blue", mid = "grey97",
+                            midpoint = 50, na.value = "grey95",
+                            limits = c(0,100),
+                            name = "Corp win [%]") +
+      theme_minimal() +
       theme(axis.text.x = element_text(angle = 45, hjust = 1,
                                        color = runnercolors),
             axis.text.y = element_text(color = corpcolors),
-            # Maybe add different colors for different corp/runner factions.
-            axis.ticks = element_blank(),
-            panel.background = element_blank(),
-            panel.border = element_blank(),
-            panel.grid.major = element_line(colour = "grey95"),
-            legend.key = element_rect(colour = NA)) +
-      guides(colour = guide_legend(override.aes = list(alpha = 0.8)))
+            panel.grid.major = element_line(colour = "grey95")) +
+      guides(color = guide_legend(override.aes = list(alpha = 0.8),
+                                  reverse = TRUE))
 
   }, width = 640, height = 480)
 
@@ -51,6 +47,7 @@ shinyServer(function(input, output) {
     filtered()  %>%
       mutate(corp_wins_percent = round(corp_wins_percent, digits = 1),
              matchup_freq = round(matchup_freq, digits = 1)) %>%
+      # Change variable names for table.
       select("Corp" = corp_id,
              "Runner" = runner_id,
              "# Games" = matchup_games,
